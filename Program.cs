@@ -9,3 +9,5 @@ for (int i = 0; i < passwordLength; i++)
     int index = rand.Next(characters.Length);
     password += characters[index];
 }
+
+Console.WriteLine($"Your generated password is: {password}");   
