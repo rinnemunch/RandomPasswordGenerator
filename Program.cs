@@ -29,6 +29,27 @@ while (keepRunning)
         Console.WriteLine("Password hidden. Stay safe.");
     }
 
+    bool hasLetter = false;
+    bool hasDigit = false;
+    bool hasSpecial = false;
+
+    foreach (char c in password)
+    {
+        if (char.IsLetter(c)) hasLetter = true;
+        else if (char.IsDigit(c)) hasDigit = true;
+        else hasSpecial = true;
+    }
+
+    string strength = "Weak";
+
+    if (password.Length >= 10 && hasLetter && hasDigit && hasSpecial)
+        strength = "Strong";
+    else if (password.Length >= 8 && hasLetter && hasDigit)
+        strength = "Medium";
+
+    Console.WriteLine($"Password strength: {strength}");
+
+
     Console.Write("Generate another password? (y/n): ");
     string again = Console.ReadLine();
     if (again.ToLower() != "y")
