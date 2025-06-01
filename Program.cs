@@ -10,4 +10,17 @@ for (int i = 0; i < passwordLength; i++)
     password += characters[index];
 }
 
-Console.WriteLine($"Your generated password is: {password}");   
+string masked = new string('*', password.Length);
+Console.WriteLine($"Your generated password is: {masked}");
+
+Console.Write("Reveal password? (y/n): ");
+string input = Console.ReadLine();
+
+if (input.ToLower() == "y")
+{
+    Console.WriteLine($"Revealed password: {password}");
+}
+else
+{
+    Console.WriteLine("Password hidden. Stay safe.");
+}
