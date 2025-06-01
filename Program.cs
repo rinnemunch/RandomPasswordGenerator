@@ -7,7 +7,6 @@ while (keepRunning)
     int passwordLength = 10;
     string password = "";
 
-
     for (int i = 0; i < passwordLength; i++)
     {
         int index = rand.Next(characters.Length);
@@ -29,26 +28,34 @@ while (keepRunning)
         Console.WriteLine("Password hidden. Stay safe.");
     }
 
-    bool hasLetter = false;
-    bool hasDigit = false;
-    bool hasSpecial = false;
+    Console.Write("Want to test your own password? (y/n): ");
+    string testInput = Console.ReadLine();
 
-    foreach (char c in password)
+    if (testInput.ToLower() == "y")
     {
-        if (char.IsLetter(c)) hasLetter = true;
-        else if (char.IsDigit(c)) hasDigit = true;
-        else hasSpecial = true;
+        Console.Write("Enter your password: ");
+        string userPassword = Console.ReadLine();
+
+        bool hasLetter = false;
+        bool hasDigit = false;
+        bool hasSpecial = false;
+
+        foreach (char c in userPassword)
+        {
+            if (char.IsLetter(c)) hasLetter = true;
+            else if (char.IsDigit(c)) hasDigit = true;
+            else hasSpecial = true;
+        }
+
+        string strength = "Weak";
+
+        if (userPassword.Length >= 10 && hasLetter && hasDigit && hasSpecial)
+            strength = "Strong";
+        else if (userPassword.Length >= 8 && hasLetter && hasDigit)
+            strength = "Medium";
+
+        Console.WriteLine($"Your password strength is: {strength}");
     }
-
-    string strength = "Weak";
-
-    if (password.Length >= 10 && hasLetter && hasDigit && hasSpecial)
-        strength = "Strong";
-    else if (password.Length >= 8 && hasLetter && hasDigit)
-        strength = "Medium";
-
-    Console.WriteLine($"Password strength: {strength}");
-
 
     Console.Write("Generate another password? (y/n): ");
     string again = Console.ReadLine();
