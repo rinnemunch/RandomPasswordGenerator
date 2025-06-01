@@ -1,26 +1,39 @@
-﻿string characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+﻿bool keepRunning = true;
 
-Random rand = new Random(); 
-int passwordLength = 10;
-string password = ""; 
-
-for (int i = 0; i < passwordLength; i++)
+while (keepRunning)
 {
-    int index = rand.Next(characters.Length);
-    password += characters[index];
-}
+    string characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    Random rand = new Random();
+    int passwordLength = 10;
+    string password = "";
 
-string masked = new string('*', password.Length);
-Console.WriteLine($"Your generated password is: {masked}");
 
-Console.Write("Reveal password? (y/n): ");
-string input = Console.ReadLine();
+    for (int i = 0; i < passwordLength; i++)
+    {
+        int index = rand.Next(characters.Length);
+        password += characters[index];
+    }
 
-if (input.ToLower() == "y")
-{
-    Console.WriteLine($"Revealed password: {password}");
-}
-else
-{
-    Console.WriteLine("Password hidden. Stay safe.");
+    string masked = new string('*', password.Length);
+    Console.WriteLine($"Your generated password is: {masked}");
+
+    Console.Write("Reveal password? (y/n): ");
+    string input = Console.ReadLine();
+
+    if (input.ToLower() == "y")
+    {
+        Console.WriteLine($"Revealed password: {password}");
+    }
+    else
+    {
+        Console.WriteLine("Password hidden. Stay safe.");
+    }
+
+    Console.Write("Generate another password? (y/n): ");
+    string again = Console.ReadLine();
+    if (again.ToLower() != "y")
+    {
+        keepRunning = false;
+        Console.WriteLine("Have a great day.");
+    }
 }
